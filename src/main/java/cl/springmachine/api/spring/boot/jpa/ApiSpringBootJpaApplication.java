@@ -1,4 +1,4 @@
-package cl.springmachine.apispringbootjpa;
+package cl.springmachine.api.spring.boot.jpa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
