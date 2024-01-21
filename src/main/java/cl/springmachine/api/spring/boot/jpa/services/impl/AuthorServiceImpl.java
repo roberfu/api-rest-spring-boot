@@ -45,7 +45,7 @@ public class AuthorServiceImpl implements AuthorService {
 	@Override
 	@Transactional
 	public AuthorResponseDto saveAuthor(AuthorRequestDto request) throws CustomException {
-		Author author = null;
+		Author author;
 		try {
 			author = authorRepository
 					.save(new Author(null, request.getName(), request.getNationality(), new HashSet<>()));

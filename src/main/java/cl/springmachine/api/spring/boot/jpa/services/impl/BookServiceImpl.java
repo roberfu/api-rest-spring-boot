@@ -54,7 +54,7 @@ public class BookServiceImpl implements BookService {
 	@Override
 	@Transactional
 	public BookResponseDto saveBook(BookRequestDto request) throws CustomException {
-		Book book = null;
+		Book book;
 		try {
 			book = bookRepository
 					.save(new Book(null, request.getTitle(), request.getGenre(), new HashSet<>(), new ArrayList<>()));

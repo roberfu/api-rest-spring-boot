@@ -56,7 +56,7 @@ public class EditionServiceImpl implements EditionService {
 	public EditionBookResponseDto saveEdition(EditionRequestDto request) throws CustomException {
 		Book book = bookRepository.findById(Long.parseLong(request.getBookId()))
 				.orElseThrow(() -> new ResourceNotFoundException(BOOK_NOT_FOUND));
-		Edition edition = null;
+		Edition edition;
 		try {
 			Detail detail = detailRepository
 					.save(new Detail(null, request.getDetails().getLanguage(), request.getDetails().getPages()));

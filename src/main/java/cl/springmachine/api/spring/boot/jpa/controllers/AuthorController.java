@@ -24,7 +24,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("authors")
+@RequestMapping("v1/authors")
 @RequiredArgsConstructor
 @Validated
 public class AuthorController {

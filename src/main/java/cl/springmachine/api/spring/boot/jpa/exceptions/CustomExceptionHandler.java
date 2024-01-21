@@ -3,6 +3,7 @@ package cl.springmachine.api.spring.boot.jpa.exceptions;
 import java.net.URI;
 import java.util.stream.Collectors;
 
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
@@ -54,7 +55,8 @@ public class CustomExceptionHandler {
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 	public ProblemDetail handleValidationException(MethodArgumentNotValidException ex, WebRequest request) {
-		String errorMessages = ex.getBindingResult().getFieldErrors().stream().map(error -> error.getDefaultMessage())
+		String errorMessages = ex.getBindingResult().getFieldErrors().stream()
+				.map(DefaultMessageSourceResolvable::getDefaultMessage)
 				.collect(Collectors.joining("; "));
 		String body = "Validation error: " + errorMessages;
 		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, body);

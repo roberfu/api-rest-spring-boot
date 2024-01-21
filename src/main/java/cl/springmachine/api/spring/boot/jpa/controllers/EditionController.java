@@ -23,7 +23,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("editions")
+@RequestMapping("v1/editions")
 @RequiredArgsConstructor
 @Validated
 public class EditionController {
