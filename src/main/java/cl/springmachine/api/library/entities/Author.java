@@ -11,12 +11,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "author")
 public class Author {
@@ -30,23 +36,7 @@ public class Author {
 	private String nationality;
 
 	@ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)
+	@Builder.Default
 	private Set<Book> books = new HashSet<>();
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		return id != null && id.equals(((Author) obj).id);
-	}
-
-	@Override
-	public int hashCode() {
-		return 2023;
-	}
 
 }

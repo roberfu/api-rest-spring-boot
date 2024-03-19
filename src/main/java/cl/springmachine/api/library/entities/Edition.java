@@ -9,10 +9,16 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -32,22 +38,5 @@ public class Edition {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "detail_id")
 	private Detail detail;
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		return id != null && id.equals(((Edition) obj).id);
-	}
-
-	@Override
-	public int hashCode() {
-		return 2023;
-	}
 
 }
