@@ -104,7 +104,7 @@ public class BookServiceImpl implements BookService {
 				.orElseThrow(() -> new ResourceNotFoundException(AUTHOR_NOT_FOUND));
 		Book book = bookRepository.findById(bookId).orElseThrow(() -> new ResourceNotFoundException(BOOK_NOT_FOUND));
 		try {
-			book.addAuthor(author);
+			book.getAuthors().add(author);
 			bookRepository.save(book);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
@@ -118,7 +118,7 @@ public class BookServiceImpl implements BookService {
 				.orElseThrow(() -> new ResourceNotFoundException(AUTHOR_NOT_FOUND));
 		Book book = bookRepository.findById(bookId).orElseThrow(() -> new ResourceNotFoundException(BOOK_NOT_FOUND));
 		try {
-			book.removeAuthor(author);
+			book.getAuthors().remove(author);
 			bookRepository.save(book);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
@@ -133,7 +133,7 @@ public class BookServiceImpl implements BookService {
 		for (String authorId : request) {
 			Author author = authorRepository.findById(Long.parseLong(authorId))
 					.orElseThrow(() -> new ResourceNotFoundException(AUTHOR_NOT_FOUND));
-			book.addAuthor(author);
+			book.getAuthors().add(author);
 		}
 		try {
 			bookRepository.save(book);

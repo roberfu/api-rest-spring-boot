@@ -61,7 +61,7 @@ public class EditionServiceImpl implements EditionService {
 			Detail detail = detailRepository
 					.save(new Detail(null, request.getDetails().getLanguage(), request.getDetails().getPages()));
 			edition = editionRepository.save(new Edition(null, request.getIsbn(), book, detail));
-			book.addEdition(edition);
+			book.getEditions().add(edition);
 			bookRepository.save(book);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
