@@ -37,7 +37,7 @@ public class BookController {
 	}
 
 	@GetMapping("/{bookId}")
-	ResponseEntity<BookAuthorEditionResponseDto> getBookById(@PathVariable Long bookId) {
+	ResponseEntity<BookAuthorEditionResponseDto> getBookById(@PathVariable(value = "bookId") Long bookId) {
 		return new ResponseEntity<>(bookService.getBookById(bookId), HttpStatus.OK);
 	}
 
@@ -47,39 +47,39 @@ public class BookController {
 	}
 
 	@PatchMapping("/{bookId}")
-	ResponseEntity<BookResponseDto> updateBook(@PathVariable Long bookId, @RequestBody BookRequestDto request)
-			throws CustomException {
+	ResponseEntity<BookResponseDto> updateBook(@PathVariable(value = "bookId") Long bookId,
+			@RequestBody BookRequestDto request) throws CustomException {
 		return new ResponseEntity<>(bookService.updateBook(request, bookId), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{bookId}")
-	ResponseEntity<Void> deleteBook(@PathVariable Long bookId) throws CustomException {
+	ResponseEntity<Void> deleteBook(@PathVariable(value = "bookId") Long bookId) throws CustomException {
 		bookService.deleteBook(bookId);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 	@GetMapping("/{bookId}/authors")
-	ResponseEntity<List<AuthorResponseDto>> getAllAuthorsByBookId(@PathVariable Long bookId) {
+	ResponseEntity<List<AuthorResponseDto>> getAllAuthorsByBookId(@PathVariable(value = "bookId") Long bookId) {
 		return new ResponseEntity<>(bookService.getAllAuthorsByBookId(bookId), HttpStatus.OK);
 	}
 
 	@PostMapping("/{bookId}/authors/{authorId}")
-	ResponseEntity<Void> addAuthorToBook(@PathVariable Long bookId, @PathVariable Long authorId)
-			throws CustomException {
+	ResponseEntity<Void> addAuthorToBook(@PathVariable(value = "bookId") Long bookId,
+			@PathVariable(value = "authorId") Long authorId) throws CustomException {
 		bookService.addAuthorToBook(bookId, authorId);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
 	@DeleteMapping("/{bookId}/authors/{authorId}")
-	ResponseEntity<Void> removeBookFromAuthor(@PathVariable Long bookId, @PathVariable Long authorId)
-			throws CustomException {
+	ResponseEntity<Void> removeBookFromAuthor(@PathVariable(value = "bookId") Long bookId,
+			@PathVariable(value = "authorId") Long authorId) throws CustomException {
 		bookService.removeAuthorFromBook(bookId, authorId);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 	@PostMapping("/{bookId}/authors")
-	ResponseEntity<Void> addAuthorsToBook(@PathVariable Long bookId, @RequestBody List<String> request)
-			throws CustomException {
+	ResponseEntity<Void> addAuthorsToBook(@PathVariable(value = "bookId") Long bookId,
+			@RequestBody List<String> request) throws CustomException {
 		bookService.addAuthorsToBook(request, bookId);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}

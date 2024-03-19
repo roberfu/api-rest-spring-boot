@@ -37,7 +37,7 @@ public class AuthorController {
 	}
 
 	@GetMapping("/{authorId}")
-	ResponseEntity<AuthorBookResponseDto> getAuthorById(@PathVariable Long authorId) {
+	ResponseEntity<AuthorBookResponseDto> getAuthorById(@PathVariable(value = "authorId") Long authorId) {
 		return new ResponseEntity<>(authorService.getAuthorById(authorId), HttpStatus.OK);
 	}
 
@@ -47,19 +47,19 @@ public class AuthorController {
 	}
 
 	@PatchMapping("/{authorId}")
-	ResponseEntity<AuthorResponseDto> updateAuthor(@PathVariable Long authorId, @RequestBody AuthorRequestDto request)
-			throws CustomException {
+	ResponseEntity<AuthorResponseDto> updateAuthor(@PathVariable(value = "authorId") Long authorId,
+			@RequestBody AuthorRequestDto request) throws CustomException {
 		return new ResponseEntity<>(authorService.updateAuthor(request, authorId), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{authorId}")
-	ResponseEntity<Void> deleteAuthor(@PathVariable Long authorId) throws CustomException {
+	ResponseEntity<Void> deleteAuthor(@PathVariable(value = "authorId") Long authorId) throws CustomException {
 		authorService.deleteAuthor(authorId);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 	@GetMapping("/{authorId}/books")
-	ResponseEntity<List<BookResponseDto>> getAllBooksByAuthorId(@PathVariable Long authorId) {
+	ResponseEntity<List<BookResponseDto>> getAllBooksByAuthorId(@PathVariable(value = "authorId") Long authorId) {
 		return new ResponseEntity<>(authorService.getAllBooksByAuthorId(authorId), HttpStatus.OK);
 	}
 }

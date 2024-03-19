@@ -36,7 +36,7 @@ public class EditionController {
 	}
 
 	@GetMapping("{editionId}")
-	ResponseEntity<EditionBookResponseDto> getEditionById(@PathVariable Long editionId) {
+	ResponseEntity<EditionBookResponseDto> getEditionById(@PathVariable(value = "editionId") Long editionId) {
 		return new ResponseEntity<>(editionService.getEditionById(editionId), HttpStatus.OK);
 	}
 
@@ -47,13 +47,13 @@ public class EditionController {
 	}
 
 	@PatchMapping("{editionId}")
-	ResponseEntity<EditionBookResponseDto> updateEdition(@PathVariable Long editionId,
+	ResponseEntity<EditionBookResponseDto> updateEdition(@PathVariable(value = "editionId") Long editionId,
 			@RequestBody EditionRequestDto request) throws CustomException {
 		return new ResponseEntity<>(editionService.updateEdition(request, editionId), HttpStatus.OK);
 	}
 
 	@DeleteMapping("{editionId}")
-	ResponseEntity<Void> deleteEdition(@PathVariable Long editionId) throws CustomException {
+	ResponseEntity<Void> deleteEdition(@PathVariable(value = "editionId") Long editionId) throws CustomException {
 		editionService.deleteEdition(editionId);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
